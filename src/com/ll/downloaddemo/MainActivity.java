@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
         @Override
         public void onObtainDownloadInfo(DownloadInfo downloadInfo, int statusCode) {
             MultiTaskDownloader.getInstance().start(url);
-            mDownloadFilename.setText(downloadInfo.getFileName());
+            mDownloadFilename.setText(downloadInfo.getFileName()+downloadInfo.getSavedPath());
         }
     };
 

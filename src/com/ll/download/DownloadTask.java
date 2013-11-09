@@ -35,18 +35,21 @@ public class DownloadTask{
     
     private ICallback mCallback;
     
+    private DownloadInfo mDownloadInfo;
+    
     public DownloadTask(String uri, String downloadDir,ICallback callback) {
         super();
         this.mUri = uri;
         this.mDownloadDir = downloadDir;
         mCallback = callback;
+        mDownloadInfo = new DownloadInfo(uri, downloadDir,mReadPos);
     }
     
     public synchronized void download(){
         if(mState == RunnerState.RUNNING){
             return;
         }
-        mRunner = new DownloadThreadRunner(mUri, mDownloadDir, mReadPos, mHandler);
+        mRunner = new DownloadThreadRunner(mDownloadInfo, mHandler);
         mState = RunnerState.RUNNING;
         mRunner.execute(RunnerOpration.START);
     }
@@ -62,7 +65,7 @@ public class DownloadTask{
     }
 
     public synchronized void obtainDownloadInfo(){
-        mRunner = new DownloadThreadRunner(mUri, mDownloadDir, mReadPos, mHandler);
+        mRunner = new DownloadThreadRunner(mDownloadInfo, mHandler);
         mRunner.updateRunnerState(RunnerState.RUNNING);
         mRunner.execute(RunnerOpration.OBTIN_DOWNLOADINFO);
     }

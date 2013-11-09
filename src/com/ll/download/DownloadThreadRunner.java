@@ -39,14 +39,13 @@ public class DownloadThreadRunner implements Runnable {
     private RunnerState runnerState = RunnerState.IDEL;
     
     private RunnerOpration mOpration;
-    
     private DownloadInfo mDownloadInfo;
     
-    public DownloadThreadRunner(String uri, String downloadDir, long readLen, Handler handler) {
+    public DownloadThreadRunner(DownloadInfo downloadInfo,Handler handler) {
         super();
-        mDownloadInfo = new DownloadInfo(uri, downloadDir,readLen);
         progressHandler = new ProgressHandler();
         mHandler = handler;
+        mDownloadInfo = downloadInfo;
     }
     
     public void execute(RunnerOpration runnerOpration){
@@ -115,6 +114,10 @@ public class DownloadThreadRunner implements Runnable {
                     float progress = 0f;
                     File file = new File(mDownloadInfo.getSavedPath() + File.separator
                             + mDownloadInfo.getFileName());
+                    if(!file.exists()){
+                    	file.createNewFile();
+                    }
+                    Logger.v(TAG, "filePath="+file.getAbsolutePath()+"]");
                     raf = new RandomAccessFile(file, "rw");
                     raf.seek(mDownloadInfo.getReadLen());
                     progressHandler.onProgress(progress);
