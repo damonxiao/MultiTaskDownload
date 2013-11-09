@@ -1,7 +1,7 @@
-package com.ll.download;
+package com.ll.download.util;
 
-import com.ll.download.DownloadTask.ICallback;
-import com.ll.download.DownloadThreadRunner.RunnerState;
+import com.ll.download.util.DownloadTask.ICallback;
+import com.ll.download.util.DownloadThreadRunner.RunnerState;
 
 import java.util.HashMap;
 

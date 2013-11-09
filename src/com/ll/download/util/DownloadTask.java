@@ -1,9 +1,9 @@
-package com.ll.download;
+package com.ll.download.util;
 
 import android.os.Handler;
 
-import com.ll.download.DownloadThreadRunner.RunnerOpration;
-import com.ll.download.DownloadThreadRunner.RunnerState;
+import com.ll.download.util.DownloadThreadRunner.RunnerOpration;
+import com.ll.download.util.DownloadThreadRunner.RunnerState;
 
 public class DownloadTask{
     

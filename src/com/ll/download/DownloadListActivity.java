@@ -1,5 +1,5 @@
 
-package com.ll.downloaddemo;
+package com.ll.download;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.ll.download.DownloadInfo;
-import com.ll.download.DownloadTask.ICallback;
-import com.ll.download.MultiTaskDownloader;
+import com.ll.download.util.DownloadInfo;
+import com.ll.download.util.MultiTaskDownloader;
+import com.ll.download.util.DownloadTask.ICallback;
 
-public class MainActivity extends Activity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+public class DownloadListActivity extends Activity {
+    private static final String TAG = DownloadListActivity.class.getSimpleName();
     private String url = "http://dl.google.com/android/ADT-22.3.0.zip";
 //    private String url = "http://distribution.hexxeh.net/archive/vanilla/4028.0.2013_04_20_1810-r706c4144/ChromeOS-Vanilla-4028.0.2013_04_20_1810-r706c4144-VirtualBox.zip";
     
@@ -25,11 +25,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mProgressBar = (ProgressBar) findViewById(R.id.download_progress);
-        mProgressBar.setMax(100);
-        mProgressView = (TextView) findViewById(R.id.progress_view);
-        mDownloadFilename = (TextView) findViewById(R.id.download_filename);
+        setContentView(R.layout.download_item);
+//        setContentView(R.layout.);
+//        mProgressBar = (ProgressBar) findViewById(R.id.download_progress);
+//        mProgressBar.setMax(100);
+//        mProgressView = (TextView) findViewById(R.id.progress_view);
+//        mDownloadFilename = (TextView) findViewById(R.id.download_filename);
     }
 
     @Override

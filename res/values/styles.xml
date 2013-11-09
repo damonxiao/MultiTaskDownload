@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -15,6 +15,18 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    
+    <!-- Download list item. -->
+    <style name="txt_style_base">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="file_name_style" parent="@style/txt_style_base">
+        <item name="android:textSize">22sp</item>
+    </style>
+    <style name="download_speed_style" parent="@style/txt_style_base">
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

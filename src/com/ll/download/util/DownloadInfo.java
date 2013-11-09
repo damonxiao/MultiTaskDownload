@@ -1,5 +1,5 @@
 
-package com.ll.download;
+package com.ll.download.util;
 
 public class DownloadInfo {
     private String fileName;
