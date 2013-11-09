@@ -1,7 +1,12 @@
 
-package com.ll.download.util;
+package com.ll.download.bean;
+
+import com.ll.download.util.DBProvider.TDownloadInfo;
+
+import android.database.Cursor;
 
 public class DownloadInfo {
+	private long id;
     private String fileName;
     private String url;
     private String savedPath;
@@ -18,6 +23,15 @@ public class DownloadInfo {
         this.readLen = readLen;
     }
 
+    public DownloadInfo(Cursor c){
+    	if(c != null){
+    		id = c.getLong(c.getColumnIndex(TDownloadInfo.ID));
+    		fileName = c.getString(c.getColumnIndex(TDownloadInfo.FILE_NAME));
+    		url = c.getString(c.getColumnIndex(TDownloadInfo.URL));
+    		savedPath = c.getString(c.getColumnIndex(TDownloadInfo.SAVED_PATH));
+    		fileSize = c.getLong(c.getColumnIndex(TDownloadInfo.FILE_SIZE));
+    	}
+    }
 
 
     public String getFileName() {
@@ -67,7 +81,16 @@ public class DownloadInfo {
     public void setReadLen(long readLen) {
         this.readLen = readLen;
     }
-    
-    
+
+	public long getId() {
+		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "DownloadInfo [id=" + id + ", fileName=" + fileName + ", url="
+				+ url + ", savedPath=" + savedPath + ", fileSize=" + fileSize
+				+ ", progress=" + progress + ", readLen=" + readLen + "]";
+	}
 
 }

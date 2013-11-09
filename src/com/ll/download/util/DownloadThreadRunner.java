@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.ll.download.bean.DownloadInfo;
+
 public class DownloadThreadRunner implements Runnable {
     
     public enum RunnerOpration{

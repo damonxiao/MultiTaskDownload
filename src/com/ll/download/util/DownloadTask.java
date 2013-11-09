@@ -2,6 +2,7 @@ package com.ll.download.util;
 
 import android.os.Handler;
 
+import com.ll.download.bean.DownloadInfo;
 import com.ll.download.util.DownloadThreadRunner.RunnerOpration;
 import com.ll.download.util.DownloadThreadRunner.RunnerState;
 
