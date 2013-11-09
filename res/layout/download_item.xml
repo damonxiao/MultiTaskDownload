@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".DownloadListActivity"
+    android:background="@android:color/darker_gray" >
+
+    <ImageView
+        android:id="@+id/file_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:onClick="handleOnClick"
+        android:src="@drawable/ic_launcher" />
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="6">
+
+        <TextView
+            android:id="@+id/file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="handleOnClick"
+            style="@style/file_name_style"
+            android:text="filename" />
+
+        <TextView
+            android:id="@+id/speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="handleOnClick"
+            style="@style/download_speed_style"
+            android:text="790kb/s" 
+            android:layout_alignParentRight="true"/>
+        <TextView
+            android:id="@+id/progress_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="handleOnClick"
+            style="@style/download_speed_style"
+            android:text="23%" 
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/speed"/>
+
+        <ProgressBar
+            android:id="@+id/progress_view"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_txt" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/opration_btn"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:clickable="true"
+        android:src="@drawable/pause_btn_selector"/>
+
+</LinearLayout>
