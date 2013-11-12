@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+
 public class DBProvider extends ContentProvider{
 	
 	private static final String TAG = DBProvider.class.getSimpleName();
@@ -22,9 +23,11 @@ public class DBProvider extends ContentProvider{
 	private static final String AUTHORITY = "com.ll.download";
 	
 	private static final int ALL_DOWNLOAD_IFNO = 1;
+	private static final int ONE_DOWNLOAD_BY_ID = 2;
 	
 	static{
 		sUriMatcher.addURI(AUTHORITY, TDownloadInfo.TABLE_NAME, ALL_DOWNLOAD_IFNO);
+		sUriMatcher.addURI(AUTHORITY, TDownloadInfo.TABLE_NAME+"/"+TDownloadInfo.ID, ONE_DOWNLOAD_BY_ID);
 	}
 	
 	@Override
@@ -96,9 +99,22 @@ public class DBProvider extends ContentProvider{
 
 	@Override
 	public int update(Uri uri, ContentValues values, String selection,
-			String[] selectionArgs) {
-		return 0;
-	}
+            String[] selectionArgs) {
+
+        int match = sUriMatcher.match(uri);
+        Logger.d(TAG, "update()[uri=" + uri + ",match=" + match + "]");
+        int effectRows = -1;
+        switch (match) {
+            case ALL_DOWNLOAD_IFNO:
+                effectRows = mDBHelper.getWritableDatabase().update(TDownloadInfo.TABLE_NAME,
+                        values, selection, selectionArgs);
+                break;
+            default:
+                break;
+        }
+
+        return effectRows;
+    }
 	
 	
 	public static class TDownloadInfo implements BaseColumns{
@@ -109,6 +125,8 @@ public class DBProvider extends ContentProvider{
 		public static final String URL = "url";
 		public static final String SAVED_PATH = "savedPath";
 		public static final String FILE_SIZE = "fileSize";
+		public static final String OPRATION_TYPE = "oprationType";
+		public static final String BASEINFO_OBTAINED = "baseInfoObtained";
 		
 		private static void createSQL(SQLiteDatabase db){
 			StringBuilder builder = new StringBuilder("create table "+TABLE_NAME+"(");
@@ -116,7 +134,9 @@ public class DBProvider extends ContentProvider{
 			builder.append(FILE_NAME+" char,");
 			builder.append(URL+" char,");
 			builder.append(SAVED_PATH+" char,");
-			builder.append(FILE_SIZE+" integer ");
+			builder.append(FILE_SIZE+" integer ,");
+			builder.append(OPRATION_TYPE+" integer ,");
+			builder.append(BASEINFO_OBTAINED+" integer ");
 			builder.append(");");
 			db.execSQL(builder.toString());
 		}

@@ -1,5 +1,10 @@
 package com.ll.download.util;
 
+import android.database.Cursor;
+
+import com.ll.download.DownloadApp;
+import com.ll.download.bean.DownloadInfo;
+import com.ll.download.util.DBProvider.TDownloadInfo;
 import com.ll.download.util.DownloadTask.ICallback;
 import com.ll.download.util.DownloadThreadRunner.RunnerState;
 
@@ -53,10 +58,10 @@ public class MultiTaskDownloader {
         }
     }
     
-    public boolean isTaskObtained(String url){
+    public boolean isTaskObtianed(String url){
         return mTasks.containsKey(url);
     }
-
+    
     public void removeTask(String url){
         if(mTasks.containsKey(url)){
             mTasks.remove(url);

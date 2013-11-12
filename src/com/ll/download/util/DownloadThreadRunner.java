@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.ll.download.bean.DownloadInfo;
+import com.ll.download.bean.DownloadInfo.OprationStatus;
 
 public class DownloadThreadRunner implements Runnable {
     
@@ -101,6 +102,7 @@ public class DownloadThreadRunner implements Runnable {
                 }
                 mDownloadInfo.setFileName(fileName);
                 mDownloadInfo.setFileSize(conn.getContentLength());
+                mDownloadInfo.setOprationType(OprationStatus.STARTED);
                 if(mHandler != null){
                     sendMsg(mDownloadInfo, DownloadTask.MSG_OBTIN_DOWNLOAD_INFO_SUCCESS);
                 }
@@ -127,10 +129,14 @@ public class DownloadThreadRunner implements Runnable {
                     while ((tmpLen = is.read(buf)) != -1 && runnerState != RunnerState.PAUSED) {
                         raf.write(buf, 0, tmpLen);
                         mDownloadInfo.setReadLen(mDownloadInfo.getReadLen() + tmpLen);
+                        //calculate progress and send message
                         progress = (float) ((float) mDownloadInfo.getReadLen() / (float) totalLen) * 100;
                         BigDecimal bigDecimal = new BigDecimal(progress);
                         progress = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
                         progressHandler.onProgress(progress);
+                        
+                        //calculate download speed and send message
+                        sendMsg((float)tmpLen / 1024f, DownloadTask.MSG_UPDATE_SPEED);
                     }
                     Logger.v(TAG, "run()[totalLen="+totalLen+",mDownloadInfo.getReadLen()="+mDownloadInfo.getReadLen()+"]");
                 }
